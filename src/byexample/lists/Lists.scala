@@ -35,6 +35,11 @@ object Lists extends App {
   def column[A](xs: List[List[A]], index: Int): List[A] =
     map(xs)(row => row(index))
   
+  def filter[A](xs: List[A])(p: A => Boolean): List[A] = xs match {
+    case Nil => Nil
+    case h :: t => if (p(h)) h :: filter(t)(p) else filter(t)(p)
+  }
+    
   println(map(List(1, 2, 3))(_*2))
   println(column(List(List(1, 4, 7), List(2, 5, 8), List(3, 6, 9)), 2))
   foreach(List("Hello", "World"))(println)
