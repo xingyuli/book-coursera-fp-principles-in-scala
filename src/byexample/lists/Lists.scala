@@ -39,9 +39,12 @@ object Lists extends App {
     case Nil => Nil
     case h :: t => if (p(h)) h :: filter(t)(p) else filter(t)(p)
   }
-    
+  
+  def reverse[A](xs: List[A]): List[A] = ((Nil: List[A]) /: xs){ (z, x) => x :: z}
+  
   println(map(List(1, 2, 3))(_*2))
   println(column(List(List(1, 4, 7), List(2, 5, 8), List(3, 6, 9)), 2))
   foreach(List("Hello", "World"))(println)
+  println(reverse(List(1, 3, 5, 7)))
   
 }
