@@ -16,6 +16,7 @@ object Exercise {
   }                                               //> isort: (xs: List[Int])List[Int]
   
   isort(1 :: 4 :: 2 :: 5 :: -1 :: Nil)            //> res0: List[Int] = List(-1, 1, 2, 4, 5)
+
   
   // Exercise 9.2.1
   def length[A](xs: List[A]): Int = {
@@ -26,6 +27,16 @@ object Exercise {
     innerLength(0, xs)
   }                                               //> length: [A](xs: List[A])Int
  
+  // better solution from http://metagear.de/articles/scala-exercises/index.html
+  trait PimedList[T] {
+  	val xs: List[T]
+  	def recursiveLength: Int = length(xs)
+  }
+  implicit def list2PimedList[T](ys: List[T]) = new PimedList[T] { val xs = ys }
+                                                  //> list2PimedList: [T](ys: List[T])byexample.lists.Exercise.PimedList[T]
+  List(1, 0, 3).recursiveLength                   //> res1: Int = 3
+
+
   // Exercise 9.4.1
   def squareList1(xs: List[Int]): List[Int] = xs match {
     case List() => Nil
@@ -35,7 +46,7 @@ object Exercise {
   def squareList2(xs: List[Int]): List[Int] = xs map { x => x * x }
                                                   //> squareList2: (xs: List[Int])List[Int]
   
-  squareList1(1 :: 2 :: 3 :: Nil)                 //> res1: List[Int] = List(1, 4, 9)
-  squareList2(1 :: 2 :: 3 :: Nil)                 //> res2: List[Int] = List(1, 4, 9)
+  squareList1(1 :: 2 :: 3 :: Nil)                 //> res2: List[Int] = List(1, 4, 9)
+  squareList2(1 :: 2 :: 3 :: Nil)                 //> res3: List[Int] = List(1, 4, 9)
   
 }

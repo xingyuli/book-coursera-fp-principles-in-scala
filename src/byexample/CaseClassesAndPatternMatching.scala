@@ -103,6 +103,16 @@ object CaseClassesAndPatternMatching extends App {
     }
   }
   
+  // alternative from http://metagear.de/articles/scala-exercises/index.html
+  /*
+  def contains(t: IntTree, v: Int): Boolean = t match {
+    case EmptyTree => false
+    case Node(e, l, _) if v < e => contains(l, v)
+    case Node(e, _, r) if v > e => contains(r, v)
+    case Node(_, _, _) => true
+  }
+  */
+  
   def insert(t: IntTree, v: Int): IntTree = t match {
     case EmptyTree => Node(v, EmptyTree, EmptyTree)
     case Node(e, l, r) => {
